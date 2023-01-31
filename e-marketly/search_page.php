@@ -34,21 +34,21 @@ include 'components/header.php';
      if($select_products->rowCount() > 0){
       while($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)){
    ?>
-   <form action="" method="post" class="box">
-      <input type="hidden" name="pid" value="<?= $fetch_product['id']; ?>">
-      <input type="hidden" name="name" value="<?= $fetch_product['name']; ?>">
-      <input type="hidden" name="price" value="<?= $fetch_product['price']; ?>">
-      <input type="hidden" name="image" value="<?= $fetch_product['image_01']; ?>">
-      <button class="fas fa-heart" type="submit" style="border-color: white; background-color: white; color: #FA6868 ;" name="add_to_wishlist"></button>
-      <a href="quick_view.php?pid=<?= $fetch_product['id']; ?>" style="border-color: white; color: black; background-color: white;" class="fas fa-eye"></a>
-      <img src="uploaded_img/<?= $fetch_product['image_01']; ?>" alt="">
-      <div class="name"><?= $fetch_product['name']; ?></div>
-      <div class="flex">
-      <div class="price" style=" color: #063970; "><span></span><strong><?= $fetch_product['price']; ?><span>.00 Dhs</span></strong></div>
-         <input type="number" name="qty" class="qty" min="1" max="99" style=" color: white; text-align: center; color: white; border-color: white;"  onkeypress="if(this.value.length == 2) return false;" value="1">
-      </div>
-      <input type="submit" style="font-size: 18px; background-color: #FA6868;" value="Add to cart" class="btn" name="add_to_cart">
-   </form>
+ <form action="" name="form-<?= $fetch_product['id']; ?>" method="post" class="box" style=" border-color: white;">
+               <input type="hidden" name="pid" value="<?= $fetch_product['id']; ?>">
+               <input type="hidden" name="name" value="<?= $fetch_product['name']; ?>">
+               <input type="hidden" name="price" value="<?= $fetch_product['price']; ?>">
+               <input type="hidden" name="image" value="<?= $fetch_product['image_01']; ?>">
+               <button class="fas fa-heart" onclick="to_wishlist('form-<?= $fetch_product['id']; ?>')" style="border-color: white; background-color: white; color: #FA6868 ;" type="button" name="add_to_wishlist"></button>
+               <a href="quick_view.php?pid=<?= $fetch_product['id']; ?>" style="border-color: white; color: black; background-color: white;" class="fas fa-eye"></a>
+               <img src="uploaded_img/<?= $fetch_product['image_01']; ?>" alt="">
+               <div class="name"><?= $fetch_product['name']; ?></div>
+               <div class="flex">
+                  <div class="price" style=" color: #063970; "><span></span><strong><?= $fetch_product['price']; ?><span>.00 Dhs</span></strong></div>
+                  <input type="number" name="qty" style="  text-align: center; border-color: white;" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
+               </div>
+               <input type="button" onclick="to_cart('form-<?= $fetch_product['id']; ?>')" value="Add to cart" class="btn btn-add-cart" name="add_to_cart">
+            </form>
    <?php
          }
       }else{
